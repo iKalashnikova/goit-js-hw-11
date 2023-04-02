@@ -1,6 +1,6 @@
-import axios from "axios";
-import Notiflix from "notiflix";
-import PictureApiService from "./components/api-service";
+import axios from 'axios';
+import Notiflix from 'notiflix';
+import PictureApiService from './components/api-service';
 
 const formEl = document.querySelector('.search-form');
 // const inputEl = document.querySelector('input');
@@ -10,34 +10,67 @@ const containerEl = document.querySelector('.gallery');
 
 const pictureApiService = new PictureApiService();
 
-
 formEl.addEventListener('submit', handleSearchPictures);
 loadMoreBtn.addEventListener('click', onLoadMore);
-    
+
 function handleSearchPictures(evt) {
   evt.preventDefault();
 
   pictureApiService.query = evt.currentTarget.elements.searchQuery.value.trim();
 
   if (pictureApiService.query === '') {
-    return
+    return;
   }
+  evt.currentTarget.elements.searchQuery.value = '';
+
   pictureApiService.resetPage();
-  
-  pictureApiService.fetchPictures().then(hits => {
-    clearMarkupContainer();
-    renderPictures(hits)
-})
-};
+
+  pictureApiService
+    .fetchPictures()
+    .then(hits => {
+      console.log(hits);
+      if (hits.length === 0) {
+        Notiflix.Notify.info(
+          '"Sorry, there are no images matching your search query. Please try again."'
+        );
+
+        return;
+      }
+
+      clearMarkupContainer();
+      renderPictures(hits);
+
+      loadMoreBtn.classList.remove('is-hidden');
+    })
+    .catch(err => console.log);
+}
 
 function onLoadMore() {
-    pictureApiService.fetchPictures().then(hits =>renderPictures(hits));
-};
+  pictureApiService
+    .fetchPictures()
+    .then(hits => {
+      renderPictures(hits);
+
+      const totalPages = Math.ceil(pictureApiService.totalHits / pictureApiService.perPage)
+      
+      if (totalPages === pictureApiService.page) {
+        Notiflix.Notify.info(
+          "We're sorry, but you've reached the end of search results."
+        );
+
+        loadMoreBtn.classList.add('is-hidden');
+
+        return;
+      }
+    }
+    )
+    .catch(err => console.log);
+}
 
 
 function pictureMarkUp(card) {
-    const galleryCard =` <div class="photo-card">
-  <img src="${card.webformatURL}" alt="" width='320' loading="lazy/>
+  const galleryCard = ` <div class="photo-card">
+  <img src="${card.webformatURL}" alt="" width='320' loading="lazy"/>
   <div class="info">
     <p class="info-item">
       <b>Likes:${card.likes}</b>
@@ -52,19 +85,17 @@ function pictureMarkUp(card) {
       <b>Downloads:${card.downloads}</b>
     </p>
   </div>
-</div>`
-    
-    galleryEl.insertAdjacentHTML('beforeend', galleryCard);
-};
+</div>`;
 
+  galleryEl.insertAdjacentHTML('beforeend', galleryCard);
+}
 
 function renderPictures(array) {
-    for (const card of array) {
-         pictureMarkUp(card);
-    }
-};
+  for (const card of array) {
+    pictureMarkUp(card);
+  }
+}
 
 function clearMarkupContainer() {
   containerEl.innerHTML = '';
-};
-
+}
