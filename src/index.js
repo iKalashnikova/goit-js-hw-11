@@ -15,18 +15,19 @@ formEl.addEventListener('submit', handleSearchPictures);
 loadMoreBtn.addEventListener('click', onLoadMore);
     
 function handleSearchPictures(evt) {
-    evt.preventDefault();
+  evt.preventDefault();
 
-    pictureApiService.query = evt.currentTarget.elements.searchQuery.value.trim();
+  pictureApiService.query = evt.currentTarget.elements.searchQuery.value.trim();
 
-    if (pictureApiService.query === '') {
-        return
-    }
-    pictureApiService.resetPage();
+  if (pictureApiService.query === '') {
+    return
+  }
+  pictureApiService.resetPage();
+  
   pictureApiService.fetchPictures().then(hits => {
     clearMarkupContainer();
     renderPictures(hits)
-  });
+})
 };
 
 function onLoadMore() {
@@ -61,8 +62,9 @@ function renderPictures(array) {
     for (const card of array) {
          pictureMarkUp(card);
     }
-}
+};
 
 function clearMarkupContainer() {
   containerEl.innerHTML = '';
-}
+};
+
