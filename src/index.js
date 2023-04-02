@@ -1,13 +1,12 @@
 import axios from "axios";
 import Notiflix from "notiflix";
 import PictureApiService from "./components/api-service";
-export {renderPictures}
-
 
 const formEl = document.querySelector('.search-form');
 // const inputEl = document.querySelector('input');
 const galleryEl = document.querySelector('.gallery');
 const loadMoreBtn = document.querySelector('.load-more');
+const containerEl = document.querySelector('.gallery');
 
 const pictureApiService = new PictureApiService();
 
@@ -23,13 +22,15 @@ function handleSearchPictures(evt) {
     if (pictureApiService.query === '') {
         return
     }
-    
-    pictureApiService.fetchPictures();
-
+    pictureApiService.resetPage();
+  pictureApiService.fetchPictures().then(hits => {
+    clearMarkupContainer();
+    renderPictures(hits)
+  });
 };
 
 function onLoadMore() {
-    pictureApiService.fetchPictures();
+    pictureApiService.fetchPictures().then(hits =>renderPictures(hits));
 };
 
 
@@ -62,3 +63,6 @@ function renderPictures(array) {
     }
 }
 
+function clearMarkupContainer() {
+  containerEl.innerHTML = '';
+}
