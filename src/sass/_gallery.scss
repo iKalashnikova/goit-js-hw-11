@@ -1,0 +1,24 @@
+.gallery {
+display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+}
+
+.photo-card {
+width: 320px;
+margin-bottom: 10px;
+    
+}
+
+.info {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+.info-item {
+    display: flex;
+    margin: 0 5px;
+    font-size: 16px;
+    color: #666;
+}
