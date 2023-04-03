@@ -16,15 +16,13 @@ width: 320px;
 
 display: flex;
 justify-content: center;
-align-items: center;
+// align-items: center;
 flex-wrap: wrap;
 object-fit: cover;
 // max-width: 100%;
-width: 320px;
-height: 320px;
 margin-top: 10px;
 
-width: calc((100% - 90px) / 4);
+width: calc((100% - 60px) / 4);
     background: #ffffff;
     box-shadow: 0px 1px 3px rgba(0, 0, 0, 0.12), 0px 1px 1px rgba(0, 0, 0, 0.14),
         0px 2px 1px rgba(0, 0, 0, 0.2);
