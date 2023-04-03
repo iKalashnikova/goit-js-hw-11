@@ -21,26 +21,34 @@ input {
     padding-left: 16px;
     padding-top: 5px;
     padding-bottom: 5px;
-    margin-right: 10px;
+    margin-right: 0px;
     margin-bottom: 16px;
 
     font-size: 14px;
     line-height: 1.43;
 }
 
-.search-btn{
- height: 20;
- width: 20;
- display: flex;
- justify-content: center;
+.search-btn {
+    position: absolute;
+    right: -15px;
+        top: 50%;
+    transform: translateY(-50%);
+    background: none;
+    border: none;
 }
 
-.search-icon{
-    fill: black;
-    padding: 0;
+.search-icon {
+    fill: #333;
+    width: 20px;
+    height: 20px;
 }
-
 
 .wrap-input {
-    display: flex;
+    position: relative;
 }
+
+
+
+// input[name="searchQuery"] {
+//     padding-right: 30px;
+// }

@@ -53,6 +53,7 @@ function onLoadMore() {
 
       console.log(object);
       console.log(pictureApiService.page);
+      
       if (Math.ceil(totalHits / pictureApiService.perPage) === pictureApiService.page) {
         Notiflix.Notify.info(
           "We're sorry, but you've reached the end of search results."
