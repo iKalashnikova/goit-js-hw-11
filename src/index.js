@@ -31,8 +31,8 @@ function handleSearchPictures(evt) {
       // console.log(({ hits, totalHits }));
       if (hits.length === 0) {
         Notiflix.Notify.info(
-          '"Sorry, there are no images matching your search query. Please try again."'
-        );
+          "Sorry, there are no images matching your search query. Please try again.");
+        
         return;
       } 
     
@@ -45,13 +45,14 @@ function handleSearchPictures(evt) {
 }
 
 function onLoadMore() {
+  
   pictureApiService
     .fetchPictures()
     .then(({ hits, totalHits })  => {
       renderPictures(hits);
 
-      pictureApiService.page += 1;
-      
+      console.log(object);
+      console.log(pictureApiService.page);
       if (Math.ceil(totalHits / pictureApiService.perPage) === pictureApiService.page) {
         Notiflix.Notify.info(
           "We're sorry, but you've reached the end of search results."
