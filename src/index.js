@@ -5,13 +5,11 @@ import SimpleLightbox from "simplelightbox";
 import "simplelightbox/dist/simple-lightbox.min.css";
 
 const formEl = document.querySelector('.search-form');
-// const inputEl = document.querySelector('input');
 const galleryEl = document.querySelector('.gallery');
 const loadMoreBtn = document.querySelector('.load-more');
 const containerEl = document.querySelector('.gallery');
 
 const pictureApiService = new PictureApiService();
-
 
 const handleSearchPictures = async evt => {
   evt.preventDefault();
@@ -53,6 +51,11 @@ const onLoadMore = async() => {
 
     renderPictures(hits);
 
+    // pictureApiService.page += 1;
+
+    console.log(Math.ceil(totalHits/pictureApiService.perPage));
+    console.log(pictureApiService.page);
+    
     if (Math.ceil(totalHits / pictureApiService.perPage) === pictureApiService.page) {
       Notiflix.Notify.info(
         "We're sorry, but you've reached the end of search results."
@@ -62,6 +65,7 @@ const onLoadMore = async() => {
       return;
     }
 
+    
 
   } catch (err) {
     console.log(err);
