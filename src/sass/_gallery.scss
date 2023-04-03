@@ -19,9 +19,9 @@ justify-content: center;
 align-items: center;
 flex-wrap: wrap;
 object-fit: cover;
-max-width: 100%;
-// width: 320px;
-height: auto;
+// max-width: 100%;
+width: 320px;
+height: 320px;
 margin-top: 10px;
 
 width: calc((100% - 90px) / 4);
@@ -52,6 +52,7 @@ position: absolute;
 
 .info-item {
     display: flex;
+    flex-direction: column;
     margin: 0 5px;
     font-size: 10px;
     color: white;
