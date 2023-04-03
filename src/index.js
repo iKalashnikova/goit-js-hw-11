@@ -74,8 +74,8 @@ function onLoadMore() {
 
 
 function pictureMarkUp(card) {
-  const galleryCard = ` <div class="photo-card">
-  <img src="${card.webformatURL}" alt="" width='320' loading="lazy"/>
+  const galleryCard = ` <div class="photo-card"><a class="gallery__link" href="${card.largeImageURL}">
+  <img src="${card.webformatURL}" alt="" width='320' loading="lazy"/></a>
   <div class="info">
     <p class="info-item">
       <b>Likes: ${card.likes}</b>
@@ -106,3 +106,19 @@ function clearMarkupContainer() {
 }
 
 
+galleryEl.addEventListener('click', handleGalleryClick)
+
+
+
+function handleGalleryClick(event) {
+    event.preventDefault()
+
+    const lightbox = new SimpleLightbox('.gallery a', {   
+        captionPosition: 'bottom',
+        captionsData: 'alt',
+        captionDelay: 250});
+
+    const imageLink = event.target.closest('.gallery__item').href;
+
+    lightbox.open(imageLink)
+}
