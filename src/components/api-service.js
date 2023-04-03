@@ -6,7 +6,7 @@ export default class PictureApiService {
     }
   
     fetchPictures() {
-        console.log(this);
+        // console.log(this);
         const URl = "https://pixabay.com/api/";
         const KEY = "34967949-bc4aa4b6b9ade32e48c05a514";
         
@@ -14,8 +14,6 @@ export default class PictureApiService {
             .then((res) => res.json())
             .then(({ hits, totalHits }) => {
                 console.log({ hits, totalHits });
-                this.page += 1;
-                
                 return { hits, totalHits }
             }
         )
