@@ -1,6 +1,8 @@
 import axios from 'axios';
 import Notiflix from 'notiflix';
 import PictureApiService from './components/api-service';
+import SimpleLightbox from "simplelightbox";
+import "simplelightbox/dist/simple-lightbox.min.css"
 
 const formEl = document.querySelector('.search-form');
 // const inputEl = document.querySelector('input');
@@ -28,6 +30,7 @@ function handleSearchPictures(evt) {
   pictureApiService
     .fetchPictures()
     .then(({ hits, totalHits }) => {
+
       // console.log(({ hits, totalHits }));
       if (hits.length === 0) {
         Notiflix.Notify.info(
@@ -35,7 +38,8 @@ function handleSearchPictures(evt) {
         
         return;
       } 
-    
+      Notiflix.Notify.info(` Hooray! We found ${totalHits} images.`);
+
       clearMarkupContainer();
       renderPictures(hits);
 
