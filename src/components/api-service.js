@@ -12,11 +12,11 @@ export default class PictureApiService {
         
         return fetch(`${URl}?key=${KEY}&q=${this.searchQuery}&image_type=photo&orientation=horizontal&safesearch=true&page=${this.page}&${this.perPage}`)
             .then((res) => res.json())
-            .then(({hits}) => {
-                console.log({hits});
+            .then(({ hits, totalHits }) => {
+                console.log({ hits, totalHits });
                 this.page += 1;
                 
-               return hits
+                return { hits, totalHits }
             }
         )
             .catch(err => console.log(err))

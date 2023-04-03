@@ -48,10 +48,10 @@ function handleSearchPictures(evt) {
 function onLoadMore() {
   pictureApiService
     .fetchPictures()
-    .then(hits => {
+    .then(({ hits, totalHits })  => {
       renderPictures(hits);
 
-      const totalPages = Math.ceil(pictureApiService.totalHits / pictureApiService.perPage)
+      const totalPages = Math.ceil(totalHits / pictureApiService.perPage);
       
       if (totalPages === pictureApiService.page) {
         Notiflix.Notify.info(
