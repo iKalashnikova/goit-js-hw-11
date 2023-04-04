@@ -28,19 +28,22 @@ const handleSearchPictures = async evt => {
       .fetchPictures();
   
 
-    if (hits.length === 0) {
-      Notiflix.Notify.warning(
-        "Sorry, there are no images matching your search query. Please try again.");
-        
-      return;
-    }
-
     Notiflix.Notify.info(` Hooray! We found ${totalHits} images.`);
 
     clearMarkupContainer();
     renderPictures(hits);
 
     loadMoreBtn.classList.remove('is-hidden');
+
+    if (hits.length === 0) {
+      Notiflix.Notify.warning(
+        "Sorry, there are no images matching your search query. Please try again.");
+        
+      return;
+    } else if (pictureApiService.totalPages <= 1) {
+      loadMoreBtn.classList.add('is-hidden');
+    }
+    
   }
   catch (err) { console.log };
 }
@@ -53,10 +56,10 @@ const onLoadMore = async() => {
 
     // pictureApiService.page += 1;
 
-    console.log(Math.ceil(totalHits/pictureApiService.perPage));
+    console.log(pictureApiService.totalPages);
     console.log(pictureApiService.page);
     
-    if (Math.ceil(totalHits / pictureApiService.perPage) === pictureApiService.page) {
+    if (pictureApiService.perPage>=pictureApiService.totalPages) {
       Notiflix.Notify.info(
         "We're sorry, but you've reached the end of search results."
       );

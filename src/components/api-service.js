@@ -5,6 +5,7 @@ export default class PictureApiService {
         this.searchQuery = '';
         this.page = 1;
         this.perPage = 40;
+        this.totalPages = 0;
     }
   
     async fetchPictures() {
@@ -13,6 +14,7 @@ export default class PictureApiService {
         try {
             const fetchPicture = await axios.get(`${URl}?key=${KEY}&q=${this.searchQuery}&image_type=photo&orientation=horizontal&safesearch=true&page=${this.page}&per_page=${this.perPage}`)
 
+            this.totalPages = Math.ceil(fetchPicture.data.totalHits / this.perPage);
             this.page += 1;
 
             return fetchPicture.data;
