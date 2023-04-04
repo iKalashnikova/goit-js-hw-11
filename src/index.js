@@ -50,6 +50,9 @@ const handleSearchPictures = async evt => {
   } catch (err) {
     console.log;
   }
+
+  lightbox.refresh();
+  
 };
 
 const onLoadMore = async () => {
@@ -57,11 +60,9 @@ const onLoadMore = async () => {
 
   try {
     const { hits, totalHits } = await pictureApiService.fetchPictures();
-
+    
     renderPictures(hits);
-
-    console.log(Math.ceil(totalHits / pictureApiService.perPage));
-    console.log(pictureApiService.page);
+    lightbox.refresh();
 
     if (
       Math.ceil(totalHits / pictureApiService.perPage) ===
@@ -117,8 +118,8 @@ loadMoreBtn.addEventListener('click', onLoadMore);
 
 galleryEl.addEventListener('click', handleGalleryClick);
 
-function handleGalleryClick(event) {
-  event.preventDefault();
+// function handleGalleryClick(event) {
+//   event.preventDefault();
 
   const lightbox = new SimpleLightbox('.gallery a', {
     captionPosition: 'bottom',
@@ -126,10 +127,10 @@ function handleGalleryClick(event) {
     captionDelay: 250,
   });
 
-  const imageLink = event.target.closest('.gallery__link').href;
+//   const imageLink = event.target.closest('.gallery__link').href;
 
-  lightbox.open(imageLink);
-}
+//   lightbox.open(imageLink);
+// }
 
 // ----------------------------------------------------------------
 
