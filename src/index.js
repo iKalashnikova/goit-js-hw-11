@@ -109,22 +109,22 @@ function clearMarkupContainer() {
 formEl.addEventListener('submit', handleSearchPictures);
 loadMoreBtn.addEventListener('click', onLoadMore);
 
-// galleryEl.addEventListener('click', handleGalleryClick)
+galleryEl.addEventListener('click', handleGalleryClick)
 
 
 
-// function handleGalleryClick(event) {
-//     event.preventDefault()
+function handleGalleryClick(event) {
+    event.preventDefault()
 
-//     const lightbox = new SimpleLightbox('.gallery a', {   
-//         captionPosition: 'bottom',
-//         captionsData: 'alt',
-//         captionDelay: 250});
+    const lightbox = new SimpleLightbox('.gallery a', {   
+        captionPosition: 'bottom',
+        captionsData: 'alt',
+        captionDelay: 250});
 
-//     const imageLink = event.target.closest('.gallery__item').href;
+    const imageLink = event.target.closest('.gallery__item').href;
 
-//     lightbox.open(imageLink)
-// }
+    lightbox.open(imageLink)
+}
 
 
 // ----------------------------------------------------------------
