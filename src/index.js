@@ -118,8 +118,8 @@ loadMoreBtn.addEventListener('click', onLoadMore);
 
 // galleryEl.addEventListener('click', handleGalleryClick);
 
-function handleGalleryClick(event) {
-  event.preventDefault();
+// function handleGalleryClick(event) {
+//   event.preventDefault();
 
   const lightbox = new SimpleLightbox('.gallery a', {
     captionPosition: 'bottom',
@@ -127,10 +127,10 @@ function handleGalleryClick(event) {
     captionDelay: 250,
   });
 
-  const imageLink = event.target.closest('.gallery__link').href;
+//   const imageLink = event.target.closest('.gallery__link').href;
 
-  lightbox.open(imageLink);
-}
+//   lightbox.open(imageLink);
+// }
 
 // ----------------------------------------------------------------
 
