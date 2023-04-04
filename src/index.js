@@ -28,22 +28,21 @@ const handleSearchPictures = async evt => {
       .fetchPictures();
   
 
-    Notiflix.Notify.info(` Hooray! We found ${totalHits} images.`);
-
-    clearMarkupContainer();
-    renderPictures(hits);
-
-    loadMoreBtn.classList.remove('is-hidden');
-
     if (hits.length === 0) {
       Notiflix.Notify.warning(
         "Sorry, there are no images matching your search query. Please try again.");
         
       return;
-    } else if (pictureApiService.totalPages <= 1) {
-      loadMoreBtn.classList.add('is-hidden');
     }
+
+    Notiflix.Notify.info(` Hooray! We found ${totalHits} images.`);
+
+    clearMarkupContainer();
+    renderPictures(hits);
     
+pictureApiService.page += 1;
+
+    loadMoreBtn.classList.remove('is-hidden');
   }
   catch (err) { console.log };
 }
@@ -54,12 +53,12 @@ const onLoadMore = async() => {
 
     renderPictures(hits);
 
-    // pictureApiService.page += 1;
+    pictureApiService.page += 1;
 
-    console.log(pictureApiService.totalPages);
+    console.log(Math.ceil(totalHits/pictureApiService.perPage));
     console.log(pictureApiService.page);
     
-    if (pictureApiService.perPage>=pictureApiService.totalPages) {
+    if (Math.ceil(totalHits / pictureApiService.perPage) === pictureApiService.page) {
       Notiflix.Notify.info(
         "We're sorry, but you've reached the end of search results."
       );
@@ -78,7 +77,7 @@ const onLoadMore = async() => {
 
 
 function pictureMarkUp(card) {
-  const galleryCard = ` <div class="photo-card"><a class="gallery__item" href="${card.largeImageURL}">
+  const galleryCard = ` <div class="photo-card"><a class="gallery__link" href="${card.largeImageURL}">
   <img src="${card.webformatURL}" alt="" width='320' loading="lazy"/></a>
   <div class="info">
     <p class="info-item">
@@ -124,7 +123,7 @@ function handleGalleryClick(event) {
         captionsData: 'alt',
         captionDelay: 250});
 
-    const imageLink = event.target.closest('.gallery__item').href;
+    const imageLink = event.target.closest('.gallery__link').href;
 
     lightbox.open(imageLink)
 }

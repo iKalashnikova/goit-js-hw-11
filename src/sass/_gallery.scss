@@ -47,12 +47,17 @@ position: absolute;
     flex-direction: row;
     align-items: center;
 }
+.info-span{
+    font-size: 10px;
+font-weight: 400;
+}
 
 .info-item {
     display: flex;
-    flex-direction: column;
+    // flex-direction: column;
     margin: 0 5px;
     font-size: 10px;
+    
     color: white;
     background-color: rgba(50, 50, 50, 0.3);
 }
