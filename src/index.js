@@ -116,10 +116,10 @@ function clearMarkupContainer() {
 formEl.addEventListener('submit', handleSearchPictures);
 loadMoreBtn.addEventListener('click', onLoadMore);
 
-galleryEl.addEventListener('click', handleGalleryClick);
+// galleryEl.addEventListener('click', handleGalleryClick);
 
-// function handleGalleryClick(event) {
-//   event.preventDefault();
+function handleGalleryClick(event) {
+  event.preventDefault();
 
   const lightbox = new SimpleLightbox('.gallery a', {
     captionPosition: 'bottom',
@@ -127,10 +127,10 @@ galleryEl.addEventListener('click', handleGalleryClick);
     captionDelay: 250,
   });
 
-//   const imageLink = event.target.closest('.gallery__link').href;
+  const imageLink = event.target.closest('.gallery__link').href;
 
-//   lightbox.open(imageLink);
-// }
+  lightbox.open(imageLink);
+}
 
 // ----------------------------------------------------------------
 
