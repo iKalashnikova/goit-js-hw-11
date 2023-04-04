@@ -9,6 +9,22 @@ const galleryEl = document.querySelector('.gallery');
 const loadMoreBtn = document.querySelector('.load-more');
 const containerEl = document.querySelector('.gallery');
 
+galleryEl.addEventListener('click', handleGalleryClick);
+
+function handleGalleryClick(event) {
+  event.preventDefault();
+
+  const lightbox = new SimpleLightbox('.gallery a', {
+    captionPosition: 'bottom',
+    captionsData: 'alt',
+    captionDelay: 250,
+  });
+
+  const imageLink = event.target.closest('.gallery__link').href;
+
+  lightbox.open(imageLink);
+}
+
 const pictureApiService = new PictureApiService();
 
 const handleSearchPictures = async evt => {
@@ -46,6 +62,7 @@ const handleSearchPictures = async evt => {
     }
 
     Notiflix.Notify.info(` Hooray! We found ${totalHits} images.`);
+
   } catch (err) {
     console.log;
   }
@@ -73,6 +90,7 @@ const onLoadMore = async () => {
       loadMoreBtn.classList.add('is-hidden');
       return;
     }
+
   } catch (err) {
     console.log(err);
   }
@@ -104,6 +122,8 @@ function renderPictures(array) {
   for (const card of array) {
     pictureMarkUp(card);
   }
+
+  lightbox.refresh();
 }
 
 function clearMarkupContainer() {
@@ -113,21 +133,7 @@ function clearMarkupContainer() {
 formEl.addEventListener('submit', handleSearchPictures);
 loadMoreBtn.addEventListener('click', onLoadMore);
 
-galleryEl.addEventListener('click', handleGalleryClick);
 
-function handleGalleryClick(event) {
-  event.preventDefault();
-
-  const lightbox = new SimpleLightbox('.gallery a', {
-    captionPosition: 'bottom',
-    captionsData: 'alt',
-    captionDelay: 250,
-  });
-
-  const imageLink = event.target.closest('.gallery__link').href;
-
-  lightbox.open(imageLink);
-}
 
 // ----------------------------------------------------------------
 
