@@ -27,7 +27,12 @@ const handleSearchPictures = async evt => {
     const { hits, totalHits } = await pictureApiService
       .fetchPictures();
   
+ clearMarkupContainer();
+  renderPictures(hits);
+  
+     Notiflix.Notify.info(` Hooray! We found ${totalHits} images.`);
 
+    loadMoreBtn.classList.remove('is-hidden');
     if (hits.length === 0) {
       Notiflix.Notify.warning(
         "Sorry, there are no images matching your search query. Please try again.");
@@ -36,15 +41,10 @@ const handleSearchPictures = async evt => {
     }
     else if (hits.length < pictureApiService.perPage) {
       loadMoreBtn.classList.add('is-hidden');
+
+      return
     }
 
-    Notiflix.Notify.info(` Hooray! We found ${totalHits} images.`);
-
-    clearMarkupContainer();
-    renderPictures(hits);
-  
-
-    loadMoreBtn.classList.remove('is-hidden');
   }
   catch (err) { console.log };
 }
