@@ -34,13 +34,15 @@ const handleSearchPictures = async evt => {
         
       return;
     }
+    else if (hits.length < pictureApiService.perPage) {
+      loadMoreBtn.classList.add('is-hidden');
+    }
 
     Notiflix.Notify.info(` Hooray! We found ${totalHits} images.`);
 
     clearMarkupContainer();
     renderPictures(hits);
-    
-pictureApiService.page += 1;
+  
 
     loadMoreBtn.classList.remove('is-hidden');
   }
