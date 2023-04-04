@@ -75,7 +75,7 @@ const onLoadMore = async() => {
 
 
 function pictureMarkUp(card) {
-  const galleryCard = ` <div class="photo-card"><a class="gallery__link" href="${card.largeImageURL}">
+  const galleryCard = ` <div class="photo-card"><a class="gallery__item" href="${card.largeImageURL}">
   <img src="${card.webformatURL}" alt="" width='320' loading="lazy"/></a>
   <div class="info">
     <p class="info-item">
