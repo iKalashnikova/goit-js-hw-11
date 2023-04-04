@@ -11,6 +11,13 @@ const containerEl = document.querySelector('.gallery');
 
 const pictureApiService = new PictureApiService();
 
+const lightbox = new SimpleLightbox('.gallery a', {
+    captionPosition: 'bottom',
+    captionsData: 'alt',
+    captionDelay: 250,
+});
+  
+
 const handleSearchPictures = async evt => {
   evt.preventDefault();
 
@@ -116,21 +123,7 @@ function clearMarkupContainer() {
 formEl.addEventListener('submit', handleSearchPictures);
 loadMoreBtn.addEventListener('click', onLoadMore);
 
-// galleryEl.addEventListener('click', handleGalleryClick);
 
-// function handleGalleryClick(event) {
-//   event.preventDefault();
-
-  const lightbox = new SimpleLightbox('.gallery a', {
-    captionPosition: 'bottom',
-    captionsData: 'alt',
-    captionDelay: 250,
-  });
-
-//   const imageLink = event.target.closest('.gallery__link').href;
-
-//   lightbox.open(imageLink);
-// }
 
 // ----------------------------------------------------------------
 
