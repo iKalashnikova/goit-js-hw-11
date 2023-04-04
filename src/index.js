@@ -47,14 +47,16 @@ pictureApiService.page += 1;
   catch (err) { console.log };
 }
 
-const onLoadMore = async() => {
+const onLoadMore = async () => {
+  
+  pictureApiService.page += 1;
+
   try {
     const { hits, totalHits } = await pictureApiService.fetchPictures();
 
     renderPictures(hits);
 
-    pictureApiService.page += 1;
-
+    
     console.log(Math.ceil(totalHits/pictureApiService.perPage));
     console.log(pictureApiService.page);
     
