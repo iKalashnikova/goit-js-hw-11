@@ -41,6 +41,7 @@ const handleSearchPictures = async evt => {
       Notiflix.Notify.warning(
         'Sorry, there are no images matching your search query. Please try again.'
       );
+      lightbox.refresh();
 
       loadMoreBtn.classList.add('is-hidden');
 
@@ -48,6 +49,8 @@ const handleSearchPictures = async evt => {
     } else if (hits.length < pictureApiService.perPage) {
       Notiflix.Notify.info(` Hooray! We found ${totalHits} images.`);
       loadMoreBtn.classList.add('is-hidden');
+
+      lightbox.refresh();
 
       return;
     }
